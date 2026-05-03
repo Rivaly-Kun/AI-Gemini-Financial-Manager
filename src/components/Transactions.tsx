@@ -337,7 +337,7 @@ export default function Transactions({ uid }: TransactionsProps) {
           </div>
         </div>
 
-        <div className="mt-5 space-y-3">
+        <div className="mt-5 space-y-3 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
           {filtered.map((t) => (
             <div
               key={t.key ?? t.id ?? t.name}

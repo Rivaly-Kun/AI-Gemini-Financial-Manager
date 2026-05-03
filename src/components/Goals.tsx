@@ -386,7 +386,7 @@ export function Goals({ uid }: GoalsProps) {
       </div>
 
       {/* Goals Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
         {goals.map((goal) => {
           const percentage = (goal.currentAmount / goal.targetAmount) * 100;
           const remaining = goal.targetAmount - goal.currentAmount;

@@ -420,7 +420,7 @@ export function Budgets({ uid }: BudgetsProps) {
       )}
 
       {/* Budget Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
         {budgetsWithSpend.map((budget) => {
           const percentage = (budget.spent / budget.budget) * 100;
           const status = getBudgetStatus(budget.spent, budget.budget);

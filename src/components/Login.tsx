@@ -203,9 +203,7 @@ export default function Login() {
                 </div>
               </div>
             </div>
-            <p className="mt-6 text-xs text-white/70">
-              Secure sign-in powered by Google.
-            </p>
+          
           </div>
         </div>
       </div>

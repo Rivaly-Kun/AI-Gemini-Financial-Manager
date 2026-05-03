@@ -13,6 +13,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
+import ReactMarkdown from "react-markdown";
 import { database } from "../utils/firebase";
 import { googleAiApiKey } from "../utils/ai";
 
@@ -537,12 +538,16 @@ export function AIChat({ uid }: AIChatProps) {
                       className={`rounded-2xl px-4 py-3 ${
                         message.role === "user"
                           ? "bg-blue-600 text-white"
-                          : "bg-gray-100 text-gray-900"
+                          : "bg-gray-100 text-gray-900 prose prose-sm max-w-none prose-blue"
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-wrap">
-                        {message.content}
-                      </p>
+                      {message.role === "user" ? (
+                        <p className="text-sm whitespace-pre-wrap">
+                          {message.content}
+                        </p>
+                      ) : (
+                        <ReactMarkdown>{message.content}</ReactMarkdown>
+                      )}
                     </div>
                     <p className="text-xs text-gray-500 mt-1 px-2">
                       {new Date(message.timestamp).toLocaleTimeString("en-US", {
@@ -629,22 +634,7 @@ export function AIChat({ uid }: AIChatProps) {
         </div>
       </Card>
 
-      {/* Info Card */}
-      <Card className="p-4 bg-blue-50 border-blue-200">
-        <div className="flex items-start gap-3">
-          <Sparkles className="text-blue-600 mt-1" size={20} />
-          <div>
-            <h3 className="font-semibold text-blue-900 text-sm">
-              AI-Powered Financial Guidance
-            </h3>
-            <p className="text-xs text-blue-700 mt-1">
-              Get personalized insights, budget recommendations, investment
-              advice, and answers to your financial questions using advanced AI
-              technology.
-            </p>
-          </div>
-        </div>
-      </Card>
+  
     </div>
   );
 }

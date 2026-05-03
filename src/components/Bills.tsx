@@ -432,7 +432,7 @@ export function Bills({ uid }: BillsProps) {
         </TabsList>
 
         <TabsContent value="pending" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
             {pendingBills.map((bill) => (
               <BillCard key={bill.key ?? bill.id ?? bill.name} bill={bill} />
             ))}
@@ -441,7 +441,7 @@ export function Bills({ uid }: BillsProps) {
 
         <TabsContent value="overdue" className="mt-6">
           {overdueBills.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
               {overdueBills.map((bill) => (
                 <BillCard key={bill.key ?? bill.id ?? bill.name} bill={bill} />
               ))}
@@ -460,7 +460,7 @@ export function Bills({ uid }: BillsProps) {
         </TabsContent>
 
         <TabsContent value="paid" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
             {paidBills.map((bill) => (
               <BillCard key={bill.key ?? bill.id ?? bill.name} bill={bill} />
             ))}

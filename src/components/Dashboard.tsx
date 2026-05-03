@@ -223,6 +223,39 @@ function StatCard({
   );
 }
 
+function BudgetOverview({ items }: { items: Budget[] }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-slate-900">
+          Budget Overview
+        </h3>
+      </div>
+      {items.length === 0 ? (
+        <p className="text-sm text-slate-500">No budgets created.</p>
+      ) : (
+        <div className="space-y-4 text-sm max-h-[300px] overflow-y-auto pr-2 no-scrollbar">
+          {items.map((budget, index) => (
+            <div key={`${budget.category}-${index}`} className="space-y-1">
+              <div className="flex items-center justify-between text-slate-900">
+                <p className="font-semibold">{budget.category}</p>
+                <p className="text-xs text-slate-600">
+                  {currency(budget.spent)} / {currency(budget.budget)}
+                </p>
+              </div>
+              <ProgressBar
+                spent={budget.spent}
+                total={budget.budget}
+                color={budget.color}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TransactionList({ items }: { items: Transaction[] }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
@@ -237,7 +270,7 @@ function TransactionList({ items }: { items: Transaction[] }) {
       {items.length === 0 ? (
         <p className="text-sm text-slate-500">No transactions yet.</p>
       ) : (
-        <ul className="space-y-3 text-sm">
+        <ul className="space-y-3 text-sm max-h-[300px] overflow-y-auto pr-2 no-scrollbar">
           {items.map((tx, index) => (
             <li
               key={`${tx.name}-${tx.date}-${index}`}
@@ -282,7 +315,7 @@ function UpcomingBills({
       {items.length === 0 ? (
         <p className="text-sm text-slate-500">No bills due.</p>
       ) : (
-        <ul className="space-y-3 text-sm">
+        <ul className="space-y-3 text-sm max-h-[300px] overflow-y-auto pr-2 no-scrollbar">
           {items.map((bill, index) => (
             <li
               key={`${bill.name}-${bill.dueDate}-${index}`}
@@ -311,38 +344,6 @@ function UpcomingBills({
   );
 }
 
-function BudgetOverview({ items }: { items: Budget[] }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-slate-900">
-          Budget Overview
-        </h3>
-      </div>
-      {items.length === 0 ? (
-        <p className="text-sm text-slate-500">No budgets created.</p>
-      ) : (
-        <div className="space-y-4 text-sm">
-          {items.map((budget, index) => (
-            <div key={`${budget.category}-${index}`} className="space-y-1">
-              <div className="flex items-center justify-between text-slate-900">
-                <p className="font-semibold">{budget.category}</p>
-                <p className="text-xs text-slate-600">
-                  {currency(budget.spent)} / {currency(budget.budget)}
-                </p>
-              </div>
-              <ProgressBar
-                spent={budget.spent}
-                total={budget.budget}
-                color={budget.color}
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 type DashboardProps = {
   uid: string;
@@ -465,7 +466,7 @@ export default function Dashboard({ uid }: DashboardProps) {
       return {
         ...budget,
         spent: spentFromTx,
-        color: budget.color || budgetColors[index % budgetColors.length],
+        color: budgetColors[index % budgetColors.length],
       };
     });
   }, [budgets, mergedTransactions]);
@@ -734,7 +735,7 @@ export default function Dashboard({ uid }: DashboardProps) {
           <StatCard key={stat.label} {...stat} />
         ))}
       </section>
-
+ <BudgetOverview items={budgetsWithSpend} />
       <section className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <TransactionList items={mergedTransactions} />
@@ -742,7 +743,7 @@ export default function Dashboard({ uid }: DashboardProps) {
         <UpcomingBills items={bills} onPay={handlePayBill} />
       </section>
 
-      <BudgetOverview items={budgetsWithSpend} />
+     
     </div>
   );
 }

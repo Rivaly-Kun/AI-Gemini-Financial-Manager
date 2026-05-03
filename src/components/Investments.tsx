@@ -725,7 +725,7 @@ export function Investments({ uid }: InvestmentsProps) {
           </Card>
 
           {/* Investment List */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
             {investments.map((inv) => {
               const returnAmount = inv.currentValue - inv.amount;
               return (
@@ -809,7 +809,7 @@ export function Investments({ uid }: InvestmentsProps) {
             {marketError ? (
               <div className="text-sm text-red-600 mb-3">{marketError}</div>
             ) : null}
-            <div className="space-y-3">
+            <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
               {marketTrends.map((trend) => (
                 <div
                   key={trend.key ?? trend.symbol}
@@ -903,7 +903,7 @@ export function Investments({ uid }: InvestmentsProps) {
             <div className="text-sm text-red-600">{aiError}</div>
           ) : null}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-2 no-scrollbar pb-4">
             {suggestions.map((suggestion) => (
               <Card
                 key={suggestion.key ?? suggestion.id ?? suggestion.title}

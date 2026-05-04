@@ -4,8 +4,8 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, googleProvider } from "../utils/firebase";
-import { Button } from "./ui/button";
+import { auth, googleProvider } from "../../utils/firebase";
+import { Button } from "../ui/button";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
